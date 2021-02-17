@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const mailer = require("../src/modules/mailer");
 
-router.post("/", async function (req, res, next) {
+router.post("/signUp", async function (req, res, next) {
   try {
     const newUser = new Users({
       email: req.body.email,
@@ -31,7 +31,7 @@ router.post("/forgot", async function (req, res, next) {
     });
 
     if (!user) {
-      return res.send(600).json({ error: "User not found" });
+      return res.sendStatus(600).json({ error: "User not found" });
     }
 
     const token = crypto.randomBytes(5).toString("hex");
@@ -49,6 +49,7 @@ router.post("/forgot", async function (req, res, next) {
       { new: true, useFindAndModify: false }
     );
 
+    console.log(req.body.email);
     mailer.sendMail(
       {
         to: req.body.email,
@@ -60,10 +61,10 @@ router.post("/forgot", async function (req, res, next) {
         if (err) {
           return res
             .status(400)
-            .send({ error: "Error trying to send the reset token" });
+            .json({ error: "Error trying to send the reset token" });
         }
 
-        return res.send();
+        return res.sendStatus();
       }
     );
   } catch (err) {
@@ -96,7 +97,7 @@ router.post("/reset", async function (req, res, next) {
 
     await user.save();
 
-    res.send();
+    res.sendStatus();
   } catch (err) {
     res.status(400).send({ error: "cannot reset password" });
   }

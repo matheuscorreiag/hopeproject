@@ -1,10 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Text, View, TextInput, TouchableOpacity } from "react-native";
+import { Text, View, TextInput, TouchableOpacity, Alert } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import api from "../../services/api";
+const url = "http://192.168.0.26:3030";
 
 import styles from "./styles";
 
 const LogIn = ({ navigation }) => {
+  const [login, setLogin] = useState({ email: "", password: "" });
+
+  const logInPlataform = async () => {
+    if (login.email !== "" && login.password !== "") {
+      try {
+        const response = await api.post(`${url}/users/authenticate`, login);
+        console.log(response);
+
+        const { token } = response.data;
+        console.log(token);
+        //await AsyncStorage.setItem(["@MyToken", token]);
+        Alert.alert("", "Login com sucesso!");
+        navigation.navigate("Welcome");
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    // api
+    //   .post("/users/authenticate")
+    //   .then(async (res) => {
+    //     console.log(res);
+    //     if (res.token !== undefined) {
+    //       await AsyncStorage.setItem(["@MyToken", token]);
+    //       navigation.navigate("Welcome");
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.groupContainer}>
@@ -13,14 +49,21 @@ const LogIn = ({ navigation }) => {
         </View>
         <View>
           <Text style={styles.inputLabel}>E-mail</Text>
-          <TextInput style={styles.input}></TextInput>
+          <TextInput
+            onChangeText={(e) => setLogin({ ...login, email: e })}
+            style={styles.input}
+          ></TextInput>
         </View>
         <View>
           <Text style={styles.inputLabel}>Password</Text>
-          <TextInput style={styles.input}></TextInput>
+          <TextInput
+            onChangeText={(e) => setLogin({ ...login, password: e })}
+            style={styles.input}
+            secureTextEntry={true}
+          ></TextInput>
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.logInButton}>
+          <TouchableOpacity onPress={logInPlataform} style={styles.logInButton}>
             <Text style={styles.buttonText}> Log In</Text>
           </TouchableOpacity>
         </View>
