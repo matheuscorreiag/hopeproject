@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Text, View, TextInput, TouchableOpacity, Alert } from "react-native";
+import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import api from "../../services/api";
@@ -15,30 +15,14 @@ const LogIn = ({ navigation }) => {
     if (login.email !== "" && login.password !== "") {
       try {
         const response = await api.post(`${url}/users/authenticate`, login);
-        console.log(response);
-
         const { token } = response.data;
-        console.log(token);
-        //await AsyncStorage.setItem(["@MyToken", token]);
-        Alert.alert("", "Login com sucesso!");
+        await AsyncStorage.setItem("@MyToken", token);
+
         navigation.navigate("Welcome");
       } catch (err) {
         console.log(err);
       }
     }
-
-    // api
-    //   .post("/users/authenticate")
-    //   .then(async (res) => {
-    //     console.log(res);
-    //     if (res.token !== undefined) {
-    //       await AsyncStorage.setItem(["@MyToken", token]);
-    //       navigation.navigate("Welcome");
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   };
 
   return (

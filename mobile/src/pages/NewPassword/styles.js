@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   },
   groupContainer: {
     width: "100%",
-    height: 500,
+    height: 600,
     alignItems: "center",
   },
   title: {
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   buttonContainer: {
-    paddingTop: 10,
+    paddingTop: 20,
   },
 });
 

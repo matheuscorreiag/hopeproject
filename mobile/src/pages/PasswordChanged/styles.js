@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
-  buttonContainer: {
+  logInButton: {
     backgroundColor: "#F0386B",
     width: 255,
     height: 72,
@@ -36,6 +36,9 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     paddingBottom: 20,
+  },
+  buttonContainer: {
+    paddingTop: 20,
   },
 });
 

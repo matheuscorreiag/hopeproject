@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import styles from "./styles";
 
@@ -16,8 +16,11 @@ const PasswordChanged = ({ navigation }) => {
           </Text>
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate("LogIn")}>
-            <Text style={styles.buttonText}> Sign In</Text>
+          <TouchableOpacity
+            style={styles.logInButton}
+            onPress={() => navigation.navigate("LogIn")}
+          >
+            <Text style={styles.buttonText}> Log In</Text>
           </TouchableOpacity>
         </View>
       </View>

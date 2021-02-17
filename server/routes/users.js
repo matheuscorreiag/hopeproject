@@ -31,7 +31,7 @@ router.post("/forgot", async function (req, res, next) {
     });
 
     if (!user) {
-      return res.sendStatus(600).json({ error: "User not found" });
+      return res.send(700).json({ error: "User not found" });
     }
 
     const token = crypto.randomBytes(5).toString("hex");
@@ -48,8 +48,8 @@ router.post("/forgot", async function (req, res, next) {
       },
       { new: true, useFindAndModify: false }
     );
+    console.log(user);
 
-    console.log(req.body.email);
     mailer.sendMail(
       {
         to: req.body.email,
@@ -61,10 +61,10 @@ router.post("/forgot", async function (req, res, next) {
         if (err) {
           return res
             .status(400)
-            .json({ error: "Error trying to send the reset token" });
+            .json({ error: "Error tryping to send the reset token" });
         }
 
-        return res.sendStatus();
+        return res.send();
       }
     );
   } catch (err) {
@@ -74,10 +74,13 @@ router.post("/forgot", async function (req, res, next) {
 
 router.post("/reset", async function (req, res, next) {
   const { email, token, password } = req.body;
+
+  console.log(email, token, password);
   try {
     const user = await Users.findOne({
       email,
     });
+    console.log(user);
 
     if (!user) {
       return res.status(400).send({ error: "User not found" });
@@ -97,7 +100,7 @@ router.post("/reset", async function (req, res, next) {
 
     await user.save();
 
-    res.sendStatus();
+    res.send();
   } catch (err) {
     res.status(400).send({ error: "cannot reset password" });
   }

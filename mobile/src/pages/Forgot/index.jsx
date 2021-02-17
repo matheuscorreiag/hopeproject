@@ -1,21 +1,20 @@
 import React, { useState } from "react";
-import { View, Text, Alert } from "react-native";
+import { View, Text, Alert, TextInput, TouchableOpacity } from "react-native";
 
 import styles from "./styles";
-import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import api from "../../services/api";
 const url = "http://192.168.0.26:3030";
 
 const Forgot = ({ navigation }) => {
-  const [email, setEmail] = useState("");
+  const [form, setForm] = useState({ email: "" });
 
   const getToken = async () => {
-    if (email !== "") {
+    if (form.email !== "") {
       try {
-        const response = await api.post(`${url}/users/forgot`, email);
-        Alert.alert("", "Token enviado");
+        await api.post(`${url}/users/forgot`, form);
+
+        Alert.alert("", "Token delivered! ");
         navigation.navigate("NewPassword");
-        console.log(response);
       } catch (err) {
         console.log(err);
       }
@@ -31,7 +30,10 @@ const Forgot = ({ navigation }) => {
         </View>
         <View style={styles.inputContainer}>
           <Text style={styles.inputLabel}> E-mail </Text>
-          <TextInput onChangeText={(e) => setEmail(e)} style={styles.input} />
+          <TextInput
+            onChangeText={(e) => setForm({ ...form, email: e })}
+            style={styles.input}
+          />
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
