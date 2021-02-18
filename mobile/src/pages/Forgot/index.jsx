@@ -10,14 +10,15 @@ const Forgot = ({ navigation }) => {
 
   const getToken = async () => {
     if (form.email !== "") {
-      try {
-        await api.post(`${url}/users/forgot`, form);
-
-        Alert.alert("", "Token delivered! ");
-        navigation.navigate("NewPassword");
-      } catch (err) {
-        console.log(err);
-      }
+      await api
+        .post(`${url}/users/forgot`, form)
+        .then(() => {
+          Alert.alert("", "Token delivered! ");
+          navigation.navigate("NewPassword");
+        })
+        .catch(() => {
+          Alert.alert("", "Error trying to send your token! ");
+        });
     }
   };
   return (

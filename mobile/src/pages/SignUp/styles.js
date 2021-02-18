@@ -5,10 +5,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#DDF0FF",
     flex: 1,
     alignItems: "center",
+    justifyContent: "center",
   },
   groupContainer: {
     height: 600,
     alignItems: "center",
+    justifyContent: "center",
   },
   title: {
     color: "#F0386B",
@@ -27,7 +29,7 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: "#FFF",
     width: 255,
-    height: 72,
+    height: 60,
     borderRadius: 14,
   },
 
@@ -45,6 +47,9 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     paddingTop: 20,
+  },
+  inputContainer: {
+    paddingBottom: 10,
   },
 });
 

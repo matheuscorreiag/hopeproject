@@ -20,14 +20,20 @@ const SignUp = ({ navigation }) => {
       form.passwordConfirm !== "" &&
       form.password === form.passwordConfirm
     ) {
-      try {
-        const response = await api.post(`${url}/users/signup`, form);
-        Alert.alert("", "Usuário criado com sucesso");
-        navigation.navigate("LogIn");
-        console.log(response);
-      } catch (err) {
-        console.log(err);
-      }
+      await api
+        .post(`${url}/users/signup`, form)
+        .then(() => {
+          Alert.alert("", "User created successfully!");
+          navigation.navigate("LogIn");
+        })
+        .catch(() => {
+          Alert.alert(
+            "Error",
+            "Invalid e-mail, maybe you already have a account?"
+          );
+        });
+    } else {
+      Alert.alert("Error", "Invalid arguments, please try again");
     }
   };
   return (
@@ -36,14 +42,14 @@ const SignUp = ({ navigation }) => {
         <View style={styles.titleContainer}>
           <Text style={styles.title}> Sign Up</Text>
         </View>
-        <View>
+        <View style={styles.inputContainer}>
           <Text style={styles.inputLabel}> E-mail </Text>
           <TextInput
             onChangeText={(e) => setForm({ ...form, email: e })}
             style={styles.input}
           ></TextInput>
         </View>
-        <View>
+        <View style={styles.inputContainer}>
           <Text style={styles.inputLabel}> Password </Text>
           <TextInput
             secureTextEntry={true}
@@ -51,7 +57,7 @@ const SignUp = ({ navigation }) => {
             style={styles.input}
           ></TextInput>
         </View>
-        <View>
+        <View style={styles.inputContainer}>
           <Text style={styles.inputLabel}> Confirm password </Text>
           <TextInput
             secureTextEntry={true}

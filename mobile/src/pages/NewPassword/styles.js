@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   changePassButton: {
     backgroundColor: "#F0386B",
     width: 255,
-    height: 72,
+    height: 60,
     borderRadius: 14,
     justifyContent: "center",
     alignItems: "center",
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: "#FFF",
     width: 255,
-    height: 72,
+    height: 60,
     borderRadius: 14,
   },
   inputLabel: {
@@ -42,10 +42,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   titleContainer: {
-    paddingBottom: 10,
+    paddingBottom: 50,
   },
   buttonContainer: {
     paddingTop: 20,
+  },
+  inputContainer: {
+    paddingBottom: 6,
   },
 });
 

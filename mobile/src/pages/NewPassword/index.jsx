@@ -21,13 +21,16 @@ const SignUp = ({ navigation }) => {
       form.passwordConfirm !== "" &&
       form.password === form.passwordConfirm
     ) {
-      try {
-        api.post(`${url}/users/reset`, form);
-        navigation.navigate("PasswordChanged");
-        console.log(response);
-      } catch (err) {
-        console.log(err);
-      }
+      api
+        .post(`${url}/users/reset`, form)
+        .then(() => {
+          navigation.navigate("PasswordChanged");
+        })
+        .catch(() => {
+          Alert.alert("Email or token invalid! ", "Please check the params.");
+        });
+    } else {
+      Alert.alert("Invalid arguments! ", "Please check the params.");
     }
   };
 
@@ -39,21 +42,21 @@ const SignUp = ({ navigation }) => {
             Check your e-mail and type your token here with your new password!
           </Text>
         </View>
-        <View>
+        <View style={styles.inputContainer}>
           <Text style={styles.inputLabel}>E-mail</Text>
           <TextInput
             onChangeText={(e) => setForm({ ...form, email: e })}
             style={styles.input}
           ></TextInput>
         </View>
-        <View>
+        <View style={styles.inputContainer}>
           <Text style={styles.inputLabel}>Token</Text>
           <TextInput
             onChangeText={(e) => setForm({ ...form, token: e })}
             style={styles.input}
           ></TextInput>
         </View>
-        <View>
+        <View style={styles.inputContainer}>
           <Text style={styles.inputLabel}>New password</Text>
           <TextInput
             onChangeText={(e) => setForm({ ...form, password: e })}
@@ -61,7 +64,7 @@ const SignUp = ({ navigation }) => {
             style={styles.input}
           ></TextInput>
         </View>
-        <View>
+        <View style={styles.inputContainer}>
           <Text style={styles.inputLabel}>Confirm new password</Text>
           <TextInput
             onChangeText={(e) => setForm({ ...form, passwordConfirm: e })}

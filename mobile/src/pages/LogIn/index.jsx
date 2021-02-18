@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 
-import { Text, View, TextInput, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  Image,
+} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import api from "../../services/api";
@@ -20,7 +27,7 @@ const LogIn = ({ navigation }) => {
 
         navigation.navigate("Welcome");
       } catch (err) {
-        console.log(err);
+        Alert.alert("", "Missing params, please try again");
       }
     }
   };
@@ -29,8 +36,12 @@ const LogIn = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.groupContainer}>
         <View>
-          <Text style={styles.title}>Log In</Text>
+          <Image
+            style={styles.logo}
+            source={require("../../assets/logo.png")}
+          />
         </View>
+
         <View>
           <Text style={styles.inputLabel}>E-mail</Text>
           <TextInput

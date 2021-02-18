@@ -14,8 +14,8 @@ const Routes = () => {
     <Stack.Navigator
       initialRouteName="LogIn"
       screenOptions={{
-        headerStyle: { backgroundColor: "#DDF0FF", elevation: 0 },
         headerTitle: false,
+        headerShown: false,
       }}
     >
       <Stack.Screen name="LogIn" component={LogIn} />

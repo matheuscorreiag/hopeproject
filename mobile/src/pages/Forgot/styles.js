@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: "#FFF",
     width: 255,
-    height: 72,
+    height: 60,
     borderRadius: 14,
   },
   inputLabel: {
@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
   },
   recieveTokenButton: {
     backgroundColor: "#F0386B",
-    width: 255,
-    height: 72,
+    width: 250,
+    height: 60,
     borderRadius: 14,
     justifyContent: "center",
     alignItems: "center",
