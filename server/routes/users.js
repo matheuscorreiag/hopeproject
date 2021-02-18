@@ -48,7 +48,6 @@ router.post("/forgot", async function (req, res, next) {
       },
       { new: true, useFindAndModify: false }
     );
-    console.log(user);
 
     mailer.sendMail(
       {
@@ -75,12 +74,10 @@ router.post("/forgot", async function (req, res, next) {
 router.post("/reset", async function (req, res, next) {
   const { email, token, password } = req.body;
 
-  console.log(email, token, password);
   try {
     const user = await Users.findOne({
       email,
     });
-    console.log(user);
 
     if (!user) {
       return res.status(400).send({ error: "User not found" });
