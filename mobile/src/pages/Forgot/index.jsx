@@ -11,7 +11,7 @@ const Forgot = ({ navigation }) => {
   const getToken = async () => {
     if (form.email !== "") {
       await api
-        .post(`${url}/users/forgot`, form)
+        .post(`${url}/forgot`, form)
         .then(() => {
           Alert.alert("", "Token delivered! ");
           navigation.navigate("NewPassword");

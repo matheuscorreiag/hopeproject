@@ -21,7 +21,7 @@ const LogIn = ({ navigation }) => {
   const logInPlataform = async () => {
     if (login.email !== "" && login.password !== "") {
       try {
-        const response = await api.post(`${url}/users/authenticate`, login);
+        const response = await api.post(`${url}/authenticate`, login);
         const { token } = response.data;
         await AsyncStorage.setItem("@MyToken", token);
 

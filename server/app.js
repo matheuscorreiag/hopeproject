@@ -1,8 +1,6 @@
 var express = require("express");
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-var bodyParser = require("body-parser");
 
+const routes = require("./src/routes");
 const cors = require("cors");
 
 const mongoose = require("mongoose");
@@ -26,10 +24,6 @@ var app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use(routes);
 
 module.exports = app;

@@ -22,7 +22,7 @@ const SignUp = ({ navigation }) => {
       form.password === form.passwordConfirm
     ) {
       api
-        .post(`${url}/users/reset`, form)
+        .post(`${url}/reset`, form)
         .then(() => {
           navigation.navigate("PasswordChanged");
         })

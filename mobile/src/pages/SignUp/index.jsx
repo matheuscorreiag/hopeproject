@@ -21,7 +21,7 @@ const SignUp = ({ navigation }) => {
       form.password === form.passwordConfirm
     ) {
       await api
-        .post(`${url}/users/signup`, form)
+        .post(`${url}/signup`, form)
         .then(() => {
           Alert.alert("", "User created successfully!");
           navigation.navigate("LogIn");
